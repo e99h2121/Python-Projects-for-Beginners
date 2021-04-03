@@ -3,14 +3,14 @@
 # 入力: 金額、わる人数
 import random
 
-amount = input("金額: ")
-ninzu = input("人数: ")
+amount = int(input("金額: "))
+ninzu = int(input("人数: "))
 
-q, mod = divmod(int(amount), int(ninzu))
+q, mod = divmod(amount, ninzu)
 print(q, mod)
 winner_amount = q+mod
 
-mylist = list(range(int(ninzu)))
+mylist = list(range(ninzu))
 print(mylist)  # [0, 1, 2, 3, 4]
 
 winner = random.choice(mylist)
