@@ -1,5 +1,7 @@
 import pandas as pd
 import sys
+import matplotlib.pyplot as plt
+
 
 args = sys.argv
 print(args)
@@ -33,6 +35,18 @@ def countbyversion():
     ret = df.groupby(['バージョン']).agg({'URL':'count'})
     ret.to_csv('output.csv', index=True, header=True)
 
+# 引数:countbyproductsubsystemversion 
+def countbyproductsubsystemversion():
+    df = pd.read_csv(args[1], header=0, parse_dates=['更新日'])
+    ret = df.groupby(['バージョン','サブシステム']).agg({'URL':'count'})
+    ret.to_csv('output.csv', index=True, header=True)
+
+## def pychart():
+#    df_monthly = df.copy()
+#    df_monthly.index = df_monthly.index.map(lambda x: x.month)
+#    df_monthly = df_monthly.groupby(level=0).sum()
+#    df_monthly.plot( kind='pie', y = 'se')
+
 
 if (args[2] == "countbydate"):
     countbydate()
@@ -42,3 +56,9 @@ elif (args[2] == "countbypersonandver"):
     countbypersonandver()
 elif (args[2] == "countbyversion"):
     countbyversion()
+elif (args[2] == "countbyproductsubsystemversion"):
+    countbyproductsubsystemversion()
+
+#elif (args[1] == "0"):
+#    pychart()
+
